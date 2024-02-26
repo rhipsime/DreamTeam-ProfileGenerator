@@ -2,9 +2,11 @@ import fs from 'fs';
 import path from 'path';
 import inquirer from 'inquirer';
 import render from './src/page-template.js';
-import { Manager } from './lib/Manager.js';
-import { Engineer } from './lib/Engineer.js';
-import { Intern } from './lib/Intern.js';
+import Manager from './lib/Manager.js';
+import Engineer from './lib/Engineer.js';
+import Intern from './lib/Intern.js';
+import { Employee } from './lib/Employee.js';
+
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
