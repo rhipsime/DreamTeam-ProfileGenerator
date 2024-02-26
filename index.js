@@ -1,17 +1,16 @@
-const Manager = require("./lib/Manager");
-const Engineer = require("./lib/Engineer");
-const Intern = require("./lib/Intern");
-const inquirer = require("inquirer"); // Required only once
-const path = require("path");
-const fs = require("fs");
+import fs from 'fs';
+import path from 'path';
+import inquirer from 'inquirer';
+import render from './src/page-template.js';
+import Manager from './lib/Manager';
+import Engineer from './lib/Engineer';
+import Intern from './lib/Intern';
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
-const render = require("./src/page-template.js");
-
 // Function to prompt user for team manager information
-function promptManager() {
+async function promptManager() {
     return inquirer.prompt([
         {
             type: 'input',
@@ -47,7 +46,7 @@ function promptTeamOptions() {
 }
 
 // Function to prompt user for engineer-specific information
-function promptEngineer() {
+async function promptEngineer() {
     return inquirer.prompt([
         {
             type: 'input',
@@ -73,7 +72,7 @@ function promptEngineer() {
 }
 
 // Function to prompt user for intern-specific information
-function promptIntern() {
+async function promptIntern() {
     return inquirer.prompt([
         {
             type: 'input',
@@ -139,24 +138,4 @@ async function gatherTeamInformation() {
 
 // Call the gatherTeamInformation function to start gathering team information
 gatherTeamInformation()
-    .then(team => {
-        // Generate HTML content using the render function
-        const htmlContent = render(team);
-
-        // Define the output directory path
-        const OUTPUT_DIR = path.resolve(__dirname, "output");
-
-        // Ensure the output directory exists, create it if it doesn't
-        if (!fs.existsSync(OUTPUT_DIR)) {
-            fs.mkdirSync(OUTPUT_DIR);
-        }
-
-        // Define the output file path
-        const outputPath = path.join(OUTPUT_DIR, "team.html");
-
-        // Write the generated HTML content to the output file
-        fs.writeFileSync(outputPath, htmlContent);
-
-        console.log(`Team HTML file generated at ${outputPath}`);
-    })
     .catch(err => console.error(err));
