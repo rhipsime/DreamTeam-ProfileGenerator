@@ -1,9 +1,9 @@
 // Import Engineer class
-import Engineer from './lib/Engineer.js';
+import Engineer from '..Engineer.js';
 // Import Intern class
-import Intern from './lib/Intern.js';
+import Intern from '..Intern.js';
 // Import Manager class
-import Manager from './lib/Manager.js';
+import Manager from '..Manager.js';
 
 // creates the team
 const generateTeam = team => {
