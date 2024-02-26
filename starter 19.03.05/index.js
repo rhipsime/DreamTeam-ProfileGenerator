@@ -139,8 +139,24 @@ async function gatherTeamInformation() {
 
 // Call the gatherTeamInformation function to start gathering team information
 gatherTeamInformation()
-    .then(() => {
-        console.log("Application finished.");
+    .then(team => {
+        // Generate HTML content using the render function
+        const htmlContent = render(team);
+
+        // Define the output directory path
+        const OUTPUT_DIR = path.resolve(__dirname, "output");
+
+        // Ensure the output directory exists, create it if it doesn't
+        if (!fs.existsSync(OUTPUT_DIR)) {
+            fs.mkdirSync(OUTPUT_DIR);
+        }
+
+        // Define the output file path
+        const outputPath = path.join(OUTPUT_DIR, "team.html");
+
+        // Write the generated HTML content to the output file
+        fs.writeFileSync(outputPath, htmlContent);
+
+        console.log(`Team HTML file generated at ${outputPath}`);
     })
     .catch(err => console.error(err));
-
