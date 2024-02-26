@@ -6,8 +6,11 @@ import Manager from './lib/Manager.js';
 import Engineer from './lib/Engineer.js';
 import Intern from './lib/Intern.js';
 
+const __dirname = path.dirname(new URL(import.meta.url).pathname); // Define __dirname using import.meta.url
+
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
+
 
 // Function to prompt user for team manager information
 async function promptManager() {
