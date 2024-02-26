@@ -46,6 +46,58 @@ function promptTeamOptions() {
     });
 }
 
+// Function to prompt user for engineer-specific information
+function promptEngineer() {
+    return inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'Enter the engineer\'s name:'
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: 'Enter the engineer\'s employee ID:'
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'Enter the engineer\'s email address:'
+        },
+        {
+            type: 'input',
+            name: 'github',
+            message: 'Enter the engineer\'s GitHub username:'
+        }
+    ]);
+}
+
+// Function to prompt user for intern-specific information
+function promptIntern() {
+    return inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'Enter the intern\'s name:'
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: 'Enter the intern\'s employee ID:'
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'Enter the intern\'s email address:'
+        },
+        {
+            type: 'input',
+            name: 'school',
+            message: 'Enter the name of the intern\'s school:'
+        }
+    ]);
+}
+
 // Function to start gathering information about team members
 async function gatherTeamInformation() {
     const team = [];
@@ -62,26 +114,33 @@ async function gatherTeamInformation() {
         switch (userChoice.option) {
             case 'Add an engineer':
                 // Prompt user for engineer information
-                // Create an instance of Engineer class
-                // Add engineer to the team array
+                const engineerInfo = await promptEngineer();
+                const engineer = new Engineer(engineerInfo.name, engineerInfo.id, engineerInfo.email, engineerInfo.github);
+                team.push(engineer);
                 break;
             case 'Add an intern':
                 // Prompt user for intern information
-                // Create an instance of Intern class
-                // Add intern to the team array
+                const internInfo = await promptIntern();
+                const intern = new Intern(internInfo.name, internInfo.id, internInfo.email, internInfo.school);
+                team.push(intern);
                 break;
             case 'Finish building the team':
                 // Finish gathering team information
-                break;
+                console.log("Building team completed.");
+                // Generate HTML
+                const html = render(team);
+                // Write HTML to file
+                fs.writeFileSync(outputPath, html);
+                console.log(`Team HTML file generated at ${outputPath}`);
+                return; // Exit the function and the application
         }
     } while (userChoice.option !== 'Finish building the team');
-
-    return team;
 }
 
 // Call the gatherTeamInformation function to start gathering team information
 gatherTeamInformation()
-    .then(team => {
-        // Once all information is gathered, you can proceed with further actions (e.g., generating HTML)
+    .then(() => {
+        console.log("Application finished.");
     })
     .catch(err => console.error(err));
+
