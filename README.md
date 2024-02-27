@@ -26,6 +26,13 @@ This application generates a webpage that displays profiles for a software engin
 - [fs](https://nodejs.org/api/fs.html): For file system operations.
 - [path](https://nodejs.org/api/path.html): For handling file paths.
 
+
+## Output 
+- Team Profile Link: [Click here](output/team.html) to view the file.
+- HTML Link: [Click here](file:///Users/arie/DreamTeam-ProfileGenerator/output/team.html)
+- Screenshot: [Click here](Assets/Screenshot%202024-02-27%20at%2021.26.26.png)
+
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
