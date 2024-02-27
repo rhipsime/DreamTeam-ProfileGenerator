@@ -11,6 +11,10 @@ const __dirname = path.dirname(new URL(import.meta.url).pathname); // Define __d
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
+// Ensure output directory exists
+if (!fs.existsSync(OUTPUT_DIR)) {
+    fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+}
 
 // Function to prompt user for team manager information
 async function promptManager() {
@@ -142,3 +146,5 @@ async function gatherTeamInformation() {
 // Call the gatherTeamInformation function to start gathering team information
 gatherTeamInformation()
     .catch(err => console.error(err));
+
+    
