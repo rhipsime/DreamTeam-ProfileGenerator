@@ -12,6 +12,8 @@
   "dependencies": {
     "inquirer": "^9.2.15"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
 }
-
